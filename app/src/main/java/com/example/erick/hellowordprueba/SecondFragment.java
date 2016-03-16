@@ -7,9 +7,12 @@ import android.app.Fragment;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.TabHost;
 
 import org.w3c.dom.Text;
 
@@ -70,14 +73,24 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_secondfragment, container, false);
-        TextView theTextView = (TextView) view.findViewById(R.id.textContent);
+        View view = inflater.inflate(R.layout.fragment_firstfrag, container, false);
+        TextView theTextView;
+        TabHost host = (TabHost)view.findViewById(R.id.tabHost);
+        host.setup();
+
+        //Tab 1
+        TabHost.TabSpec spec = host.newTabSpec("Tab One");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("Tab One");
+        host.addTab(spec);
+
+        //Tab 2
+        spec = host.newTabSpec("Tab Two");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("Geomorfología");
+        host.addTab(spec);
+        theTextView = (TextView) view.findViewById(R.id.textContentTab2);
         theTextView.setText(Html.fromHtml("" +
-                "<h2>Geología</h2>" +
-                "<p>El cantón de Santa Ana está constituido geológicamente por materiales de los períodos Terciario y Cuaternario; son las rocas sedimentarias del Terciario las que predominan en la región. Del período Terciario se encuentran rocas de origen sedimentario e intrusivo de la época Mioceno. Las sedimentarias están agrupadas bajo el nombre de formación Pacacua, que corresponde a una secuencia de materiales, constituida por interestratificaciones de conglomerados brechosos y areniscas conglomeráticas, areniscas, limolitas y lutitas, todas tobáceas, en algunas partes con coloraciones moráceas; ubicadas entre el cerro Coyote y el sector suroeste del poblado Matinilla, y de este último hasta el cerro Mesas; así como en el sector aledaño al cerro Mina.</p>" +
-                "<p>Las rocas intrusivas, corresponden a los Intrusivos Acidos de la Cordillera de Talamanca, tales como dioritas cuárcicas y granodioritas, también gabros y granitos; los cuales se ubican en los cerros Escazú, así como en cerro Palomas. Entre los materiales del periodo Cuaternario, se hallan rocas de origen volcánico y sedimentario de la época Holoceno. Las primeras corresponden a materiales Volcánicos, tales como lavas, tobas y piroclastos; situados en la zona comprendida por las villas Pozos, Río Oro, Piedades y el límite norte del cantón; y a Depósitos Fluviales y Coluviales; localizados en el sector aledaño a ciudad de Santa Ana y sector sur de esta, lo mismo que en las márgenes del curso medio del río Oro.</p>" +
-                "<br>" +
-                "<h2>Geomorfología</h2>" +
                 "<p>El cantón de Santa Ana presenta tres unidades geomórificas, denominadas forma originada por acción intrusiva, de origen volcánico y originado por remoción en masa. La unidad originada por acción intrusiva, se divide en dos subunidades llamadas Macizo de Escazú y Loma del Alto de las Palomas.</p>" +
                 "<p>La subunidad Macizo de Escazú, se localiza en la zona comprendida por villa Salitral, confluencia de los ríos Virilla y Uruca, cerros de Escazú y el límite sur y oeste del cantón; se caracteriza por presentar laderas de fuerte pendiente, las divisorias son redondeadas pero muy escarpadas; esta unidad se compone propiamente de rocas ígneas intrusivas y volcánicas con escamas o intercalaciones de sedimentos, las cuales en superficie se encuentran muy meteorizadas, se observan evidencias de la acción hidrotermal, y neumatolítica a consecuencia de la vecindad en el subsuelo de masas intrusivas, manifestadas con calinización de las rocas, hilillos de sílice y silicificación en general; esta subunidad se originó por la acción causada por cuerpos intrusivos.</p>" +
                 "<p>La subunidad Loma del Alto de las Palomas, se ubica entre los poblados Honduras y Alto Palomas oeste; constituye una loma alargada, las laderas son de pendiente suave, redondeada, convexas, con muy pocas vías de drenaje superficial; esta unidad corresponde a la Formación Pacacua, cubierta hacia los flancos bajos de las laderas por ignimbritas recientes, dentro de las rocas se encuentran areniscas tobáceas muy meteorizadas y algo afectadas por la acción hidrotermal de intrusiones locales, es frecuente la presencia de zonas muy arcillificadas que tienen problemas de estabilidad; su forma se ha originado por la acción que la erosión ha ejercido sobre rocas volcano sedimentarias de la citada formación, afectadas por distintos grados de efectos intrusivos.</p>" +
@@ -86,6 +99,19 @@ public class SecondFragment extends Fragment {
                 "<p>El nombre técnico correcto es fosa tectónica, debido a la presencia de una falla a todo lo largo del pie de la sierra volcánica Central, la cual está evidenciada por la existencia de fuentes termominerales; así como la interrupción brusca y alineada con la supuesta falla de las estribaciones que bajan de la mencionada sierra hacia el valle; lo mismo que por la presencia de un vulcanismo sin explicación aparente (Formación Pacacua), en correspondencia con la posición de la falla o cerca de ella la unidad originada por remoción en masa, se manifiesta por el deslizamiento del alto de Tapezco, el cual se encuentra en un pequeño sector al sureste del poblado Matinilla.</p>" +
                 "<p>Se caracteriza por una marcada cicatriz en la parte superior donde se inicia el movimiento de tierras, grietas longitudinales siguiendo aproximadamente curvas de nivel y que generalmente marcó grandes diferencias de relieve, terracitas en gran cantidad, e irregularidades abundantes en forma de montículos y depresiones.</p>" +
                 "<p>Los desplazamientos verticales son en algunos sitios de siete metros, producto del hundimiento del terreno. Las rocas de esta unidad corresponden a la formación Pacacua encontrándose areniscas, conglomerados y lutitas; todo en un alto grado de meteorización. El origen de este deslizamiento está en una capa arcillosa, que se encuentra en algunos lugares a profundidades de diez metros y en otros a veinte metros. La gran humedad dentro de estas rocas es factor primordial que favorece al movimiento de la masa del terreno.</p>"));
+        theTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        //Tab 3
+        spec = host.newTabSpec("Tab Three");
+        spec.setContent(R.id.tab3);
+        spec.setIndicator("Geología");
+        host.addTab(spec);
+
+        theTextView = (TextView) view.findViewById(R.id.textContentTab3);
+        theTextView.setText(Html.fromHtml("" +
+                "<p>El cantón de Santa Ana está constituido geológicamente por materiales de los períodos Terciario y Cuaternario; son las rocas sedimentarias del Terciario las que predominan en la región. Del período Terciario se encuentran rocas de origen sedimentario e intrusivo de la época Mioceno. Las sedimentarias están agrupadas bajo el nombre de formación Pacacua, que corresponde a una secuencia de materiales, constituida por interestratificaciones de conglomerados brechosos y areniscas conglomeráticas, areniscas, limolitas y lutitas, todas tobáceas, en algunas partes con coloraciones moráceas; ubicadas entre el cerro Coyote y el sector suroeste del poblado Matinilla, y de este último hasta el cerro Mesas; así como en el sector aledaño al cerro Mina.</p>" +
+                "<p>Las rocas intrusivas, corresponden a los Intrusivos Acidos de la Cordillera de Talamanca, tales como dioritas cuárcicas y granodioritas, también gabros y granitos; los cuales se ubican en los cerros Escazú, así como en cerro Palomas. Entre los materiales del periodo Cuaternario, se hallan rocas de origen volcánico y sedimentario de la época Holoceno. Las primeras corresponden a materiales Volcánicos, tales como lavas, tobas y piroclastos; situados en la zona comprendida por las villas Pozos, Río Oro, Piedades y el límite norte del cantón; y a Depósitos Fluviales y Coluviales; localizados en el sector aledaño a ciudad de Santa Ana y sector sur de esta, lo mismo que en las márgenes del curso medio del río Oro.</p>"
+                ));
         theTextView.setMovementMethod(new ScrollingMovementMethod());
         return view;
     }
@@ -127,5 +153,27 @@ public class SecondFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+  /*  @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getActivity().getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
